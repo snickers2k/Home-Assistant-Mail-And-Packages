@@ -1414,8 +1414,8 @@ def mock_imap_paack_delivered():
         )
         mock_conn.search.return_value = ("OK", [b"1"])
         mock_conn.uid.return_value = ("OK", [b"1"])
-        f = open("tests/test_emails/paack_delivered.eml", "r")
-        email_file = f.read()
+        with open("tests/test_emails/paack_delivered.eml", "r") as f:
+            email_file = f.read()
         mock_conn.fetch.return_value = ("OK", [(b"", email_file.encode("utf-8"))])
         mock_conn.select.return_value = ("OK", [])
         yield mock_conn
@@ -1440,8 +1440,8 @@ def mock_imap_paack_delivering():
         )
         mock_conn.search.return_value = ("OK", [b"1"])
         mock_conn.uid.return_value = ("OK", [b"1"])
-        f = open("tests/test_emails/paack_delivering.eml", "r")
-        email_file = f.read()
+        with open("tests/test_emails/paack_delivering.eml", "r") as f:
+            email_file = f.read()
         mock_conn.fetch.return_value = ("OK", [(b"", email_file.encode("utf-8"))])
         mock_conn.select.return_value = ("OK", [])
         yield mock_conn
