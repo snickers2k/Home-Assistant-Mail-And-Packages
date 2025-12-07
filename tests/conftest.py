@@ -1394,7 +1394,4 @@ def mock_imap_amazon_fwd():
         yield mock_conn
 
 
-@pytest.fixture(autouse=True)
-def auto_enable_custom_integrations(enable_custom_integrations):
-    """Enable custom integration tests."""
-    yield
+
