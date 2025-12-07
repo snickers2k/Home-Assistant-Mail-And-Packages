@@ -1,0 +1,21 @@
+Date: Thu, 7 Dec 2023 13:43:00 +0100
+From: Paack <noreply@paack.co>
+To: test@example.com
+Subject: Pedido entregado
+MIME-Version: 1.0
+Content-Type: text/html; charset=UTF-8
+
+<html>
+<body>
+<h1>¡Pedido entregado!</h1>
+<p>Hola Mathis König,</p>
+<p>Tu pedido de AMAZON ha sido entregado hoy a las 13:43.</p>
+<p>¿Cómo fue tu experiencia de entrega?</p>
+<p>Saludos,<br>Paack</p>
+<p>¿Alguna duda? Contacta con nuestro servicio de atención al cliente en el número gratuito +34931223651</p>
+<h2>🏠 DIRECCIÓN DE ENTREGA</h2>
+<p>Carrer Miquel Altoaguirre 1, 07181, Magaluf</p>
+<h2>🏷 NÚMERO DE VENTA</h2>
+<p>534000021249891842</p>
+</body>
+</html>
