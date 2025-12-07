@@ -1,4 +1,5 @@
 """Tests for helpers module."""
+
 import datetime
 import errno
 from datetime import date, timezone
@@ -111,7 +112,7 @@ async def test_process_emails(
     state = hass.states.get(MAIL_IMAGE_URL_ENTITY)
     assert state.state == "http://127.0.0.1:8123/local/mail_and_packages/testfile.gif"
     result = process_emails(hass, config)
-    assert isinstance(result["mail_updated"],datetime.datetime)
+    assert isinstance(result["mail_updated"], datetime.datetime)
     assert result["zpackages_delivered"] == 0
     assert result["zpackages_transit"] == 0
     assert result["amazon_delivered"] == 0
@@ -158,7 +159,7 @@ async def test_process_emails_external(
         == "http://really.fake.host.net:8123/local/mail_and_packages/testfile.gif"
     )
     result = process_emails(hass, config)
-    assert isinstance(result["mail_updated"],datetime.datetime)
+    assert isinstance(result["mail_updated"], datetime.datetime)
     assert result["zpackages_delivered"] == 0
     assert result["zpackages_transit"] == 0
     assert result["amazon_delivered"] == 0
@@ -1078,3 +1079,17 @@ async def test_amazon_shipped_fwd(hass, mock_imap_amazon_fwd, caplog):
     result = get_items(mock_imap_amazon_fwd, "order")
     assert result == ["123-1234567-1234567"]
     assert "Arrive Date: Tuesday, January 11" in caplog.text
+
+
+async def test_paack_delivered(hass, mock_imap_paack_delivered):
+    """Test Paack delivered detection."""
+    result = get_count(mock_imap_paack_delivered, "paack_delivered", True, "./", hass)
+    assert result["count"] == 1
+    assert result["tracking"] == ["534000021249891842"]
+
+
+async def test_paack_delivering(hass, mock_imap_paack_delivering):
+    """Test Paack delivering detection."""
+    result = get_count(mock_imap_paack_delivering, "paack_delivering", True, "./", hass)
+    assert result["count"] == 1
+    assert result["tracking"] == ["534000021249891842"]
