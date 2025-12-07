@@ -1,4 +1,5 @@
 """Constants for Mail and Packages."""
+
 from __future__ import annotations
 
 from typing import Final
@@ -371,6 +372,29 @@ SENSOR_DATA = {
     },
     "auspost_packages": {},
     "auspost_tracking": {"pattern": ["\\d{7,10,12}|[A-Za-z]{2}[0-9]{9}AU "]},
+    # Paack
+    "paack_delivered": {
+        "email": ["noreply@paack.co", "no-reply@paack.co"],
+        "subject": ["Pedido entregado"],
+        "body": ["ha sido entregado"],
+    },
+    "paack_delivering": {
+        "email": ["noreply@paack.co", "no-reply@paack.co"],
+        "subject": ["en camino", "reparto hoy"],
+    },
+    "paack_packages": {},
+    "paack_tracking": {"pattern": ["\\d{18}"]},
+    # Correos
+    "correos_delivered": {
+        "email": ["noreply@correos.es", "comunicacion@correos.es"],
+        "subject": ["ha sido entregado", "entregado correctamente"],
+    },
+    "correos_delivering": {
+        "email": ["noreply@correos.es", "comunicacion@correos.es"],
+        "subject": ["en camino", "YA ESTÁ EN CAMINO", "LLEGARÁ EN LAS PRÓXIMAS HORAS"],
+    },
+    "correos_packages": {},
+    "correos_tracking": {"pattern": ["\\d{16}"]},
 }
 
 # Sensor definitions
@@ -577,6 +601,25 @@ SENSOR_TYPES: Final[dict[str, SensorEntityDescription]] = {
         icon="mdi:package-variant-closed",
         key="auspost_packages",
     ),
+    # Paack
+    "paack_delivered": SensorEntityDescription(
+        name="Mail Paack Delivered",
+        native_unit_of_measurement="package(s)",
+        icon="mdi:package-variant",
+        key="paack_delivered",
+    ),
+    "paack_delivering": SensorEntityDescription(
+        name="Mail Paack Delivering",
+        native_unit_of_measurement="package(s)",
+        icon="mdi:truck-delivery",
+        key="paack_delivering",
+    ),
+    "paack_packages": SensorEntityDescription(
+        name="Mail Paack Packages",
+        native_unit_of_measurement="package(s)",
+        icon="mdi:package-variant-closed",
+        key="paack_packages",
+    ),
     # Poczta Polska SA
     # "poczta_polska_delivered": SensorEntityDescription(
     #     name="Poczta Polska Delivered",
@@ -653,6 +696,25 @@ SENSOR_TYPES: Final[dict[str, SensorEntityDescription]] = {
         icon="mdi:package-variant-closed",
         key="gls_packages",
     ),
+    # Correos
+    "correos_delivering": SensorEntityDescription(
+        name="Mail Correos Delivering",
+        native_unit_of_measurement="package(s)",
+        icon="mdi:truck-delivery",
+        key="correos_delivering",
+    ),
+    "correos_delivered": SensorEntityDescription(
+        name="Mail Correos Delivered",
+        native_unit_of_measurement="package(s)",
+        icon="mdi:package-variant",
+        key="correos_delivered",
+    ),
+    "correos_packages": SensorEntityDescription(
+        name="Mail Correos Packages",
+        native_unit_of_measurement="package(s)",
+        icon="mdi:package-variant-closed",
+        key="correos_packages",
+    ),
     ###
     # !!! Insert new sensors above these two !!!
     ###
@@ -706,8 +768,10 @@ SHIPPERS = [
     "hermes",
     "royal",
     "auspost",
+    "paack",
     "poczta_polska",
     "inpost_pl",
     "dpd_com_pl",
     "gls",
+    "correos",
 ]
