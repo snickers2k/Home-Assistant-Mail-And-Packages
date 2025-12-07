@@ -594,7 +594,7 @@ SENSOR_TYPES: Final[dict[str, SensorEntityDescription]] = {
     "paack_delivered": SensorEntityDescription(
         name="Mail Paack Delivered",
         native_unit_of_measurement="package(s)",
-        icon="mdi:package-variant-closed",
+        icon="mdi:package-variant",
         key="paack_delivered",
     ),
     "paack_delivering": SensorEntityDescription(
