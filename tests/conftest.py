@@ -1447,6 +1447,58 @@ def mock_imap_paack_delivering():
         yield mock_conn
 
 
+@pytest.fixture()
+def mock_imap_correos_delivered():
+    """Mock imap class values for Correos delivered."""
+    with patch(
+        "custom_components.mail_and_packages.helpers.imaplib"
+    ) as mock_imap_correos_delivered:
+        mock_conn = mock.Mock(spec=imaplib.IMAP4_SSL)
+        mock_imap_correos_delivered.IMAP4_SSL.return_value = mock_conn
+
+        mock_conn.login.return_value = (
+            "OK",
+            [b"user@fake.email authenticated (Success)"],
+        )
+        mock_conn.list.return_value = (
+            "OK",
+            [b'(\\HasNoChildren) "/" "INBOX"'],
+        )
+        mock_conn.search.return_value = ("OK", [b"1"])
+        mock_conn.uid.return_value = ("OK", [b"1"])
+        with open("tests/test_emails/correos_delivered.eml", "r") as f:
+            email_file = f.read()
+        mock_conn.fetch.return_value = ("OK", [(b"", email_file.encode("utf-8"))])
+        mock_conn.select.return_value = ("OK", [])
+        yield mock_conn
+
+
+@pytest.fixture()
+def mock_imap_correos_delivering():
+    """Mock imap class values for Correos delivering."""
+    with patch(
+        "custom_components.mail_and_packages.helpers.imaplib"
+    ) as mock_imap_correos_delivering:
+        mock_conn = mock.Mock(spec=imaplib.IMAP4_SSL)
+        mock_imap_correos_delivering.IMAP4_SSL.return_value = mock_conn
+
+        mock_conn.login.return_value = (
+            "OK",
+            [b"user@fake.email authenticated (Success)"],
+        )
+        mock_conn.list.return_value = (
+            "OK",
+            [b'(\\HasNoChildren) "/" "INBOX"'],
+        )
+        mock_conn.search.return_value = ("OK", [b"1"])
+        mock_conn.uid.return_value = ("OK", [b"1"])
+        with open("tests/test_emails/correos_delivering.eml", "r") as f:
+            email_file = f.read()
+        mock_conn.fetch.return_value = ("OK", [(b"", email_file.encode("utf-8"))])
+        mock_conn.select.return_value = ("OK", [])
+        yield mock_conn
+
+
 @pytest.fixture(autouse=True)
 def auto_enable_custom_integrations(enable_custom_integrations):
     """Enable custom integration tests."""
