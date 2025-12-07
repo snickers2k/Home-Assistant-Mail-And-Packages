@@ -384,6 +384,17 @@ SENSOR_DATA = {
     },
     "paack_packages": {},
     "paack_tracking": {"pattern": ["\\d{18}"]},
+    # Correos
+    "correos_delivered": {
+        "email": ["noreply@correos.es", "comunicacion@correos.es"],
+        "subject": ["ha sido entregado", "entregado correctamente"],
+    },
+    "correos_delivering": {
+        "email": ["noreply@correos.es", "comunicacion@correos.es"],
+        "subject": ["en camino", "YA ESTÁ EN CAMINO", "LLEGARÁ EN LAS PRÓXIMAS HORAS"],
+    },
+    "correos_packages": {},
+    "correos_tracking": {"pattern": ["\\d{16}"]},
 }
 
 # Sensor definitions
@@ -685,6 +696,25 @@ SENSOR_TYPES: Final[dict[str, SensorEntityDescription]] = {
         icon="mdi:package-variant-closed",
         key="gls_packages",
     ),
+    # Correos
+    "correos_delivering": SensorEntityDescription(
+        name="Mail Correos Delivering",
+        native_unit_of_measurement="package(s)",
+        icon="mdi:truck-delivery",
+        key="correos_delivering",
+    ),
+    "correos_delivered": SensorEntityDescription(
+        name="Mail Correos Delivered",
+        native_unit_of_measurement="package(s)",
+        icon="mdi:package-variant",
+        key="correos_delivered",
+    ),
+    "correos_packages": SensorEntityDescription(
+        name="Mail Correos Packages",
+        native_unit_of_measurement="package(s)",
+        icon="mdi:package-variant-closed",
+        key="correos_packages",
+    ),
     ###
     # !!! Insert new sensors above these two !!!
     ###
@@ -743,4 +773,5 @@ SHIPPERS = [
     "inpost_pl",
     "dpd_com_pl",
     "gls",
+    "correos",
 ]

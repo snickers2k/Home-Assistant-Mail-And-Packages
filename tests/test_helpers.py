@@ -1093,3 +1093,17 @@ async def test_paack_delivering(hass, mock_imap_paack_delivering):
     result = get_count(mock_imap_paack_delivering, "paack_delivering", True, "./", hass)
     assert result["count"] == 1
     assert result["tracking"] == ["534000021249891842"]
+
+
+async def test_correos_delivered(hass, mock_imap_correos_delivered):
+    """Test Correos delivered detection."""
+    result = get_count(mock_imap_correos_delivered, "correos_delivered", True, "./", hass)
+    assert result["count"] == 1
+    assert result["tracking"] == ["9344851012641576"]
+
+
+async def test_correos_delivering(hass, mock_imap_correos_delivering):
+    """Test Correos delivering detection."""
+    result = get_count(mock_imap_correos_delivering, "correos_delivering", True, "./", hass)
+    assert result["count"] == 1
+    assert result["tracking"] == ["9344851012641576"]
