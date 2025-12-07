@@ -1498,8 +1498,3 @@ def mock_imap_correos_delivering():
         mock_conn.select.return_value = ("OK", [])
         yield mock_conn
 
-
-@pytest.fixture(autouse=True)
-def auto_enable_custom_integrations(enable_custom_integrations):
-    """Enable custom integration tests."""
-    yield
